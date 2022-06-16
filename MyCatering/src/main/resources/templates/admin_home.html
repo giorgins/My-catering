@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='admin_home')">
+
+</head>
+<body>
+	<div class=" topnav">
+		<h1>
+			<img style="width: 32px;" src="/images/catering.png">MyCatering
+		</h1>
+		<a sec:authorize="!isAuthenticated()" href="/home"
+			th:text="#{header.home}">Home</a> <a
+			sec:authorize="hasAuthority('DEFAULT')" href="/home"
+			th:text="#{header.home}">Home</a> <a sec:authorize="hasRole('USER')"
+			href="/home" th:text="#{header.home}">Home</a> <a
+			sec:authorize="hasAuthority('ADMIN')" href="/admin/home"
+			th:text="#{header.home}">Home</a> <a href="/chefAll"
+			th:text="#{header.chefAll}">Chef</a> <a href="/buffetAll"
+			th:text="#{header.buffetAll}">Buffet</a> <a href="/piatti"
+			th:text="#{header.piatti}">Piatti</a> <a href="/ingredienti"
+			th:text="#{header.ingredienti}">Chef</a> <a class="logout"
+			th:href="@{/logout}">Logout</a>
+	</div>
+
+	<section class="sezioneContenuto">
+
+		<h4 th:text="#{header.benvenuto}">Benvenuto!</h4>
+		<h5>Effettua le operazioni da Admin</h5>
+		<div class="container">
+			<div style="padding-top: 3%; text-align: center;">
+				<div class="row">
+					<div class="col-sm-6" style="padding-left: 50px;">
+						<div class="card border-warning ">
+							<div class="card-body">
+								<h5 class="card-title">Chef</h5>
+								<p class="card-text">Qui puoi aggiungere ed elimanare Chef</p>
+								<div>
+									<a href="/admin/newChef" class="btn btn btn-outline-warning">Aggiungi
+										Chef</a> <a href="/admin/deleteChef"
+										class="btn btn btn-outline-warning">Elimina Chef</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6" style="padding-right: 50px;">
+						<div class="card border-warning ">
+							<div class="card-body">
+								<h5 class="card-title">Buffet</h5>
+								<p class="card-text">Qui puoi aggiungere ed elimanare Buffet</p>
+								<div>
+									<a href="/admin/newBuffet" class="btn btn btn-outline-warning">Aggiungi
+										Buffet </a> <a href="/admin/deleteBuffet"
+										class="btn btn btn-outline-warning">Elimina Buffet </a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="padding-top: 3%;">
+				<div class="row">
+					<div class="col-sm-6" style="padding-left: 50px;">
+						<div class="card border-warning ">
+							<div class="card-body">
+								<h5 class="card-title">Piatto</h5>
+								<p class="card-text">Qui puoi aggiungere ed elimanare Piatto</p>
+								<div>
+									<a href="/admin/newPiatto" class="btn btn btn-outline-warning">Aggiungi
+										Piatto</a> <a href="/admin/deletePiatto"
+										class="btn btn btn-outline-warning">Elimina piatto</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-6" style="padding-right: 50px;">
+						<div class="card border-warning ">
+							<div class="card-body">
+								<h5 class="card-title">Ingrediente</h5>
+								<p class="card-text">Qui puoi aggiungere ed elimanare
+									Ingrediente</p>
+								<div style="padding-left: 20%">
+									<a href="/admin/newIngrediente"
+										class="btn btn btn-outline-warning">Aggiungi Ingrediente </a>
+									<a href="/admin/deleteIngrediente"
+										class="btn btn btn-outline-warning">Elimina ingrediente </a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+
+</body>
+</html>

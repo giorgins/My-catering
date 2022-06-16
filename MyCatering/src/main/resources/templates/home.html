@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='home')">
+</head>
+<body>
+
+	<div class=" topnav">
+		<h1>
+			<img style="width: 32px;" src="/images/catering.png">MyCatering
+		</h1>
+		<a sec:authorize="!isAuthenticated()" href="/home"
+			th:text="#{header.home}">Home</a> <a
+			sec:authorize="hasAuthority('isAutheticate')" href="/home"
+			th:text="#{header.home}">Home</a> <a
+			sec:authorize="hasAuthority('DEFAULT')" href="/home"
+			th:text="#{header.home}">Home</a> <a sec:authorize="hasRole('USER')"
+			href="/home" th:text="#{header.home}">Home</a> <a
+			sec:authorize="hasAuthority('ADMIN')" href="/admin/home"
+			th:text="#{header.home}">Home</a> <a href="/chefAll"
+			th:text="#{header.chefAll}">Chef</a> <a href="/buffetAll"
+			th:text="#{header.buffetAll}">Buffet</a> <a href="/piatti"
+			th:text="#{header.piatti}">Piatti</a> <a href="/ingredienti"
+			th:text="#{header.ingredienti}">Chef</a> <a class="logout"
+			th:href="@{/logout}">Logout</a>
+	</div>
+
+	<section class="sezioneContenuto">
+		<div>
+			<h4>Benvenuto!</h4>
+		</div>
+
+		<h4 th:text="#{header.menuUtente}">Menu</h4>
+		<h6>Qui puoi trovare anche i nostri piatti, e gli ingredenti
+			rigorosamente bio</h6>
+		<div>
+			<a href="/piatti" th:text="#{header.piatti}">Elenco piatti</a>
+		</div>
+		<div>
+			<a href="/ingredienti" th:text="#{header.ingredienti}">Elenco
+				ingredienti</a>
+		</div>
+		<div class="container">
+
+			<div class="row justify-content-center">
+				<div class="col-2"></div>
+				<div class="col-4">
+
+					<div class="card1" style="width: 21rem; padding-top: 0px;">
+						<img src="/images/carloCracco2.jpg" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Scropri i nostri Chef</h5>
+							<p class="card-text">Affidabili e esperti .</p>
+							<div style="padding-left: 40%">
+								<a href="/chefAll" class="btn btn-outline-warning">Chef</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="card1" style="padding-top: 0px; padding-right: 0px;">
+						<img src="/images/zucchine.jpg" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Scopri i nostri Buffet</h5>
+							<p class="card-text">Dal vegetariano all'asiatico.</p>
+							<div style="padding-left: 40%">
+								<a href="/buffetAll" class="btn btn-outline-warning">Buffet</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-2"></div>
+			</div>
+		</div>
+
+
+
+	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+
+
+</body>
+</html>

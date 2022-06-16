@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='cancella_buffet')">
+</head>
+<body>
+	<div class=" topnav">
+		<h1>
+			<img style="width: 32px;" src="/images/catering.png">MyCatering
+		</h1>
+		<a sec:authorize="!isAuthenticated()" href="/home"
+			th:text="#{header.home}">Home</a> <a
+			sec:authorize="hasAuthority('DEFAULT')" href="/home"
+			th:text="#{header.home}">Home</a> <a sec:authorize="hasRole('USER')"
+			href="/home" th:text="#{header.home}">Home</a> <a
+			sec:authorize="hasAuthority('ADMIN')" href="/admin/home"
+			th:text="#{header.home}">Home</a> <a href="/chefAll"
+			th:text="#{header.chefAll}">Chef</a> <a href="/buffetAll"
+			th:text="#{header.buffetAll}">Buffet</a> <a href="/piatti"
+			th:text="#{header.piatti}">Piatti</a> <a href="/ingredienti"
+			th:text="#{header.ingredienti}">Chef</a> <a class="logout"
+			th:href="@{/logout}">Logout</a>
+	</div>
+	<section class="sezioneContenuto">
+		<h4>Cancellazione Buffet</h4>
+		<h4 th:text="#{header.buffetAll}">Lista buffet</h4>
+		<form th:action="@{/admin/deleteBuffet}" method="POST">
+			<div class="mx-auto" style="width: 400px;">
+				<ul class="elenco">
+					<li class="list-group-item border border-warning"
+						th:each="buffet : ${buffetAll}">
+						<div>
+							<input type="radio" name="buffetDaCancellare"
+								th:value="${buffet.id}" /> <label
+								th:text="|${buffet.nome} ${buffet.descrizione}|"></label>
+						</div>
+
+					</li>
+				</ul>
+			</div>
+
+
+			<div>
+				<button class="btn btn-outline-warning" type="submit">Cancella</button>
+			</div>
+		</form>
+	</section>
+
+
+	<div class="fixed-bottom">
+		<footer th:replace="fragments/base.html :: fondo"></footer>
+	</div>
+</body>
+</html>

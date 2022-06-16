@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='aggiungi_ingrediente')">
+</head>
+<body>
+
+	<div class=" topnav">
+		<h1>
+			<img style="width: 32px;" src="/images/catering.png">MyCatering
+		</h1>
+		<a sec:authorize="!isAuthenticated()" href="/home"
+			th:text="#{header.home}">Home</a> <a
+			sec:authorize="hasAuthority('DEFAULT')" href="/home"
+			th:text="#{header.home}">Home</a> <a sec:authorize="hasRole('USER')"
+			href="/home" th:text="#{header.home}">Home</a> <a
+			sec:authorize="hasAuthority('ADMIN')" href="/admin/home"
+			th:text="#{header.home}">Home</a> <a href="/chefAll"
+			th:text="#{header.chefAll}">Chef</a> <a href="/buffetAll"
+			th:text="#{header.buffetAll}">Buffet</a> <a href="/piatti"
+			th:text="#{header.piatti}">Piatti</a> <a href="/ingredienti"
+			th:text="#{header.ingredienti}">Chef</a> <a class="logout"
+			th:href="@{/logout}">Logout</a>
+	</div>
+
+	<section class="sezioneContenuto" style="padding-bottom: 2%;">
+		<div>
+			<h4>Aggiungi un Ingrediente</h4>
+		</div>
+		<form class="container " th:action="@{'/admin/newIngrediente'}"
+			method="POST" th:object="${ingrediente}">
+			<div class="row">
+				<div class="col"></div>
+				<div class="col-lg-4 col-sm-8 ">
+					<div th:if="${#fields.hasGlobalErrors()}">
+						<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+					</div>
+					<div>
+						<div>Nome:</div>
+
+						<input name="nome" type="text" class="form-control" id="nome"
+							placeholder="nome">
+						<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+
+					</div>
+					<div>
+						<div>Descrizione:</div>
+						<input name="descrizione" type="text" class="form-control"
+							id="nome" placeholder="descrizione">
+						<div th:if="${#fields.hasErrors('descrizione')}"
+							th:errors="*{descrizione}"></div>
+					</div>
+					<div>
+						<div>Origine:</div>
+						<input name="origine" type="text" class="form-control" id="nome"
+							placeholder="origine">
+						<div th:if="${#fields.hasErrors('origine')}" th:errors="origine"></div>
+					</div>
+					<div>
+						<p th:text="#{msgAdmin.NewIngredientePiatto}">Scegli Piatto</p>
+						<div class="mx-auto" style="width: 300px;">
+							<ul class="elenco">
+								<li class="list-group-item border border-warning"
+									th:each="piatto : ${piatti}">
+									<div>
+										<input type="radio" name="piatto" th:value="${piatto.id}" />
+										<label th:text="${piatto.nome}"></label>
+									</div>
+								</li>
+							</ul>
+
+						</div>
+						<div>
+							<button class="btn btn-outline-warning" type="submit">Conferma</button>
+						</div>
+					</div>
+				</div>
+				<div class="col"></div>
+			</div>
+		</form>
+	</section>
+
+
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
